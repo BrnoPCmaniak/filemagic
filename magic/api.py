@@ -18,6 +18,12 @@ if not libname:
                       "If import fails, verify that libmagic is installed "
                       "to a directory registered with crle. ".format(libname),
                       ImportWarning)
+    elif platform.system() == 'Linux':
+        libname = 'libmagic.so.1'
+        warnings.warn("ctypes.util.find_library wasn't been able to locate "
+                      "libmagic; manually setting libname to {0}. "
+                      "If import fails, verify that libmagic is installed."
+                      .format(libname), ImportWarning)
     else:
         raise ImportError('Unable to find magic library')
 
